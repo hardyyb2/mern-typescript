@@ -1,11 +1,15 @@
-import actions from "./actions";
+import { ThunkDispatch as Dispatch } from "redux-thunk";
+
+import actions, { HomeActionTypes } from "./actions";
 import { ClientLibrary } from "../../../lib";
 
 const db = new ClientLibrary();
 
 const DEFAULT_ERR_MESSAGE = "Some Error Occurred";
 
-const fetchName = (name) => async (dispatch) => {
+const fetchName = (name: string) => async (
+  dispatch: Dispatch<HomeActionTypes, {}, any>
+) => {
   dispatch(actions.requestName());
 
   try {
@@ -21,7 +25,9 @@ const fetchName = (name) => async (dispatch) => {
   }
 };
 
-const addName = (name, age) => async (dispatch) => {
+const addName = (name: string, age: number) => async (
+  dispatch: Dispatch<HomeActionTypes, {}, any>
+) => {
   dispatch(actions.requestName());
 
   try {

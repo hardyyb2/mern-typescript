@@ -1,8 +1,8 @@
-const types = {
+const homeTypes = {
   REQUEST_NAME: "REQUEST_NAME",
   RECEIVE_NAME: "RECEIVE_NAME",
   RECEIVE_NAME_ERROR: "RECEIVE_NAME_ERROR",
   SAVED_NAME: "SAVED_NAME",
 };
 
-export default types;
+export default homeTypes;

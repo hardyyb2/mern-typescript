@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 
 import styles from "./Home.module.css";
 
-const HomeComponent = ({
+interface IProps {
+  name: string;
+  age: number;
+  error: string | null;
+  loading: boolean;
+  fetchNameConnect: (name: string) => void;
+  addNameConnect: (name: string, age: number) => void;
+}
+
+const HomeComponent: React.FC<IProps> = ({
   name,
   age,
   error,
@@ -20,9 +29,9 @@ const HomeComponent = ({
   const checkDetails = () => {
     let userDetails = localStorage.getItem("userDetails");
     if (userDetails) {
-      userDetails = JSON.parse(userDetails);
-      setOldName(userDetails.name);
-      setOldAge(userDetails.age);
+      let parsedUserDetails = JSON.parse(userDetails);
+      setOldName(parsedUserDetails.name);
+      setOldAge(parsedUserDetails.age);
     }
   };
 
@@ -30,7 +39,7 @@ const HomeComponent = ({
     checkDetails();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!newName) {
       return setErr("Please enter Name");
@@ -43,7 +52,7 @@ const HomeComponent = ({
     }, 1000);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setErr("");
     const elem = event.target.name;
     const val = event.target.value;

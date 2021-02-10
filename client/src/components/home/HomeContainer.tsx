@@ -1,9 +1,13 @@
+import { ThunkDispatch as Dispatch } from "redux-thunk";
 import { connect } from "react-redux";
 
 import HomeComponent from "./HomeComponent";
 import { homeOperations } from "./duck";
 
-const mapStateToProps = (state) => {
+import { IState } from "../../store";
+import { HomeActionTypes } from "./duck/actions";
+
+const mapStateToProps = (state: IState) => {
   const { name, age, error, loading } = state.home;
   return {
     name,
@@ -13,9 +17,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  const fetchNameConnect = (name) => dispatch(homeOperations.fetchName(name));
-  const addNameConnect = (name, age) =>
+const mapDispatchToProps = (dispatch: Dispatch<HomeActionTypes, {}, any>) => {
+  const fetchNameConnect = (name: string) =>
+    dispatch(homeOperations.fetchName(name));
+  const addNameConnect = (name: string, age: number) =>
     dispatch(homeOperations.addName(name, age));
 
   return {

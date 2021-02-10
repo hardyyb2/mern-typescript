@@ -1,13 +1,18 @@
-import types from "./types";
+import types from "./actionTypes";
+import { HomeActionTypes } from "./actions";
+import { HomeState } from "./types";
 
-const INITIAL_STATE = {
+const INITIAL_STATE: HomeState = {
   name: "",
   age: 0,
   loading: false,
   error: null,
 };
 
-const homeReducer = (state = INITIAL_STATE, action) => {
+const homeReducer = (
+  state: HomeState = INITIAL_STATE,
+  action: HomeActionTypes
+) => {
   const { type, payload } = action;
 
   switch (type) {
