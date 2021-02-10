@@ -4,7 +4,9 @@ const BASE_PATH =
   process.env.REACT_APP_BASE_URL || `http://localhost:3000/api/v1.1`;
 
 class ClientLibrary {
-  constructor() {
+  private basePath: string;
+
+  public constructor() {
     this.basePath = BASE_PATH;
   }
 
@@ -38,7 +40,7 @@ class ClientLibrary {
       });
   }
 
-  getName(name) {
+  getName(name: string) {
     const options = {
       method: "get",
     };
@@ -46,7 +48,7 @@ class ClientLibrary {
     return this.request(`/name/${name}`, options);
   }
 
-  createName(name, age) {
+  createName(name: string, age: number) {
     const options = {
       method: "post",
       data: JSON.stringify({ name, age }),
@@ -54,7 +56,10 @@ class ClientLibrary {
     return this.request("/name", options);
   }
 
-  updateName(name, { name: newName, age }) {
+  updateName(
+    name: string,
+    { name: newName, age }: { name: string; age: number }
+  ) {
     const options = {
       method: "put",
       data: JSON.stringify({ name: newName, age }),
@@ -62,7 +67,7 @@ class ClientLibrary {
     return this.request(`/name/${name}`, options);
   }
 
-  deleteName(name) {
+  deleteName(name: string) {
     const options = {
       method: "delete",
     };
