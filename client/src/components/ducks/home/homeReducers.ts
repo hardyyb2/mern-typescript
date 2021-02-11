@@ -1,5 +1,5 @@
-import types from "./actionTypes";
-import { HomeActionTypes } from "./actions";
+import constants from "./homeConstants";
+import { HomeActionTypes } from "./homeActions";
 import { HomeState } from "./types";
 
 const INITIAL_STATE: HomeState = {
@@ -16,13 +16,13 @@ const homeReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case types.REQUEST_NAME:
+    case constants.REQUEST_NAME:
       return {
         ...state,
         loading: true,
       };
 
-    case types.RECEIVE_NAME:
+    case constants.RECEIVE_NAME:
       const { name, age = 0 } = payload;
       return {
         ...state,
@@ -31,14 +31,14 @@ const homeReducer = (
         loading: false,
       };
 
-    case types.RECEIVE_NAME_ERROR:
+    case constants.RECEIVE_NAME_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
       };
 
-    case types.SAVED_NAME:
+    case constants.SAVED_NAME:
       return {
         ...state,
         loading: false,

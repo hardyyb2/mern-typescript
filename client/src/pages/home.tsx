@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch as Dispatch } from "redux-thunk";
 
-import { IState } from "../../store";
-import { homeOperations } from "./duck";
+import { IState } from "../store";
 
-import { HomeActionTypes } from "./duck/actions";
+import { homeOperations, HomeActionTypes } from "../components/ducks";
 
-import styles from "./Home.module.css";
+import styles from "../styles/PageStyles/Home.module.css";
 
 const HomeComponent: React.FC<{}> = () => {
   const { error, loading } = useSelector((state: IState) => state.home);

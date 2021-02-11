@@ -1,6 +1,6 @@
 import { ThunkDispatch as Dispatch } from "redux-thunk";
 
-import actions, { HomeActionTypes } from "./actions";
+import actions, { HomeActionTypes } from "./homeActions";
 import { ClientLibrary } from "../../../lib";
 
 const db = new ClientLibrary();

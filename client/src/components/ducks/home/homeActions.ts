@@ -1,4 +1,4 @@
-import types from "./actionTypes";
+import constants from "./homeConstants";
 
 interface REQUEST_NAME_PROPS {
   type: string;
@@ -6,7 +6,7 @@ interface REQUEST_NAME_PROPS {
 }
 
 const requestName = (): REQUEST_NAME_PROPS => ({
-  type: types.REQUEST_NAME,
+  type: constants.REQUEST_NAME,
   payload: null,
 });
 
@@ -16,7 +16,7 @@ interface RECEIVE_NAME_PROPS {
 }
 
 const receiveName = (name: string, age: number): RECEIVE_NAME_PROPS => ({
-  type: types.RECEIVE_NAME,
+  type: constants.RECEIVE_NAME,
   payload: { name, age },
 });
 
@@ -26,7 +26,7 @@ interface RECEIVE_NAME_ERROR_PROPS {
 }
 
 const receiveNameError = (error: string): RECEIVE_NAME_ERROR_PROPS => ({
-  type: types.RECEIVE_NAME_ERROR,
+  type: constants.RECEIVE_NAME_ERROR,
   payload: error,
 });
 
@@ -36,7 +36,7 @@ interface SAVED_NAME_PROPS {
 }
 
 const savedName = (): SAVED_NAME_PROPS => ({
-  type: types.SAVED_NAME,
+  type: constants.SAVED_NAME,
   payload: null,
 });
 
