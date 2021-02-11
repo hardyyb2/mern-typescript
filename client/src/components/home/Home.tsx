@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ThunkDispatch as Dispatch } from "redux-thunk";
+
+import { IState } from "../../store";
+import { homeOperations } from "./duck";
+
+import { HomeActionTypes } from "./duck/actions";
 
 import styles from "./Home.module.css";
 
-interface IProps {
-  name: string;
-  age: number;
-  error: string | null;
-  loading: boolean;
-  fetchNameConnect: (name: string) => void;
-  addNameConnect: (name: string, age: number) => void;
-}
+const HomeComponent: React.FC<{}> = () => {
+  const { error, loading } = useSelector((state: IState) => state.home);
 
-const HomeComponent: React.FC<IProps> = ({
-  name,
-  age,
-  error,
-  loading,
-  fetchNameConnect,
-  addNameConnect,
-}) => {
+  const dispatch: Dispatch<HomeActionTypes, {}, any> = useDispatch();
+
   const [newName, setNewName] = useState("");
   const [newAge, setNewAge] = useState("");
   const [err, setErr] = useState("");
@@ -46,7 +41,7 @@ const HomeComponent: React.FC<IProps> = ({
     } else if (!newAge) {
       return setErr("Please enter Age");
     }
-    addNameConnect(newName, parseInt(newAge));
+    dispatch(homeOperations.addName(newName, parseInt(newAge)));
     setTimeout(() => {
       checkDetails();
     }, 1000);
