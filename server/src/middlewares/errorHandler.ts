@@ -5,7 +5,13 @@ import { Messages, getDuplicate } from "../utils";
 
 const { SERVER_ERROR } = Messages;
 
-const errorHandler = (err: any, res: Response) => {
+interface ErrorProps extends ErrorResponse {
+  errors?: any;
+  code?: number;
+  value?: string | number;
+}
+
+const errorHandler = (err: ErrorProps, res: Response) => {
   let error = { ...err };
   error.message = err.message;
 
@@ -32,10 +38,16 @@ const errorHandler = (err: any, res: Response) => {
     error = new ErrorResponse(message, 400);
   }
 
-  res.status(error.statusCode || 500).json({
-    success: false,
-    error: error.message || SERVER_ERROR,
-  });
+  res
+    .status(
+      typeof error.statusCode === "number"
+        ? error.statusCode
+        : parseInt(error.statusCode) || 500
+    )
+    .json({
+      success: false,
+      error: error.message || SERVER_ERROR,
+    });
 };
 
 export default errorHandler;

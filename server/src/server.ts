@@ -3,15 +3,13 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
 
+import { NameRoute } from "./routes";
 import { errorHandler } from "./middlewares";
 import { Logs } from "./utils";
 import "./services/db.service";
 
-import { NameRoute } from "./routes";
-
-const { errorLog, successLog } = Logs;
-
 dotenv.config();
+const { errorLog, successLog } = Logs;
 const app = express();
 app.use(express.json());
 app.use(cors());
