@@ -38,11 +38,8 @@ const homeReducer = (
         loading: false,
       };
 
-    case constants.SAVED_NAME:
-      return {
-        ...state,
-        loading: false,
-      };
+    case constants.DELETED_NAME:
+      return INITIAL_STATE;
 
     default:
       return state;

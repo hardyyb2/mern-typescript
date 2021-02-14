@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch as Dispatch } from "redux-thunk";
 
-import { IState } from "../store";
+import { Input } from "../common";
 
-import { homeOperations, HomeActionTypes } from "../components/ducks";
+import { IState } from "../store";
+import { homeOperations, HomeActionTypes } from "../store/ducks";
 
 import styles from "../styles/PageStyles/Home.module.css";
 
 const HomeComponent: React.FC<{}> = () => {
-  const { error, loading } = useSelector((state: IState) => state.home);
+  const { error, name, age } = useSelector((state: IState) => state.home);
 
   const dispatch: Dispatch<HomeActionTypes, {}, any> = useDispatch();
 
@@ -17,20 +18,8 @@ const HomeComponent: React.FC<{}> = () => {
   const [newAge, setNewAge] = useState("");
   const [err, setErr] = useState("");
 
-  const [oldName, setOldName] = useState("");
-  const [oldAge, setOldAge] = useState("");
-
-  const checkDetails = () => {
-    let userDetails = localStorage.getItem("userDetails");
-    if (userDetails) {
-      let parsedUserDetails = JSON.parse(userDetails);
-      setOldName(parsedUserDetails.name);
-      setOldAge(parsedUserDetails.age);
-    }
-  };
-
   useEffect(() => {
-    checkDetails();
+    dispatch(homeOperations.checkDetails());
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -41,9 +30,6 @@ const HomeComponent: React.FC<{}> = () => {
       return setErr("Please enter Age");
     }
     dispatch(homeOperations.addName(newName, parseInt(newAge)));
-    setTimeout(() => {
-      checkDetails();
-    }, 1000);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,33 +43,32 @@ const HomeComponent: React.FC<{}> = () => {
     }
   };
 
+  const handleDeleteName = () => {
+    dispatch(homeOperations.deleteName(name));
+    // .then(() => {
+    //   setNewAge("");
+    //   setNewName("");
+    // });
+  };
+
   return (
     <div className={styles.root}>
-      {oldName ? (
-        <div className={styles.details}>
-          Welcome, {oldName} ( {oldAge} )
+      {name ? (
+        <div className={styles.detailsContainer}>
+          <div className={styles.details}>
+            Welcome, {name} ( {age} )
+          </div>
+          <button onClick={handleDeleteName} className={styles.button}>
+            Delete
+          </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className={styles.form}>
-          <input
-            type="text"
-            placeholder="Enter Name..."
-            value={newName}
-            name="name"
-            onChange={handleChange}
-            className={styles.input}
-          />
-          <input
-            type="text"
-            placeholder="Enter Age..."
-            value={newAge}
-            name="age"
-            onChange={handleChange}
-            className={styles.input}
-          />
+          <Input value={newName} name="name" onChange={handleChange} />
+          <Input value={newAge} name="age" onChange={handleChange} />
 
-          <button type="submit" disabled={loading} className={styles.button}>
-            {loading ? "Wait" : "Submit"}
+          <button type="submit" className={styles.button}>
+            Submit
           </button>
           <div className={styles.error}>
             {err} <br /> {error}

@@ -1,4 +1,4 @@
-import { HomeState } from "../components/ducks/home";
+import { HomeState } from "./ducks/home";
 
 export interface IState {
   home: HomeState;

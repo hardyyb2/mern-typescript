@@ -30,13 +30,13 @@ const receiveNameError = (error: string): RECEIVE_NAME_ERROR_PROPS => ({
   payload: error,
 });
 
-interface SAVED_NAME_PROPS {
+interface DELETED_NAME_PROPS {
   type: string;
   payload: null;
 }
 
-const savedName = (): SAVED_NAME_PROPS => ({
-  type: constants.SAVED_NAME,
+const deletedName = () => ({
+  type: constants.DELETED_NAME,
   payload: null,
 });
 
@@ -44,13 +44,13 @@ export type HomeActionTypes =
   | REQUEST_NAME_PROPS
   | RECEIVE_NAME_PROPS
   | RECEIVE_NAME_PROPS
-  | SAVED_NAME_PROPS;
+  | DELETED_NAME_PROPS;
 
 const actions = {
   requestName,
   receiveName,
   receiveNameError,
-  savedName,
+  deletedName,
 };
 
 export default actions;
