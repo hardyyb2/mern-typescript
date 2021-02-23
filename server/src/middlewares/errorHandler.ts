@@ -1,7 +1,8 @@
 import { Response } from "express";
 
 import { ErrorResponse } from "../common";
-import { Messages, getDuplicate } from "../utils";
+import { getDuplicate } from "../utils/functions";
+import { Messages } from "../utils/constants";
 
 const { SERVER_ERROR } = Messages;
 

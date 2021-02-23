@@ -1,7 +1,7 @@
 import { connection, connect } from "mongoose";
 import dotenv from "dotenv";
 
-import { Logs } from "../utils";
+import { Logs } from "../utils/functions";
 
 const { dbSuccessLog, dbErrorLog } = Logs;
 

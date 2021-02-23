@@ -5,7 +5,7 @@ import cors from "cors";
 
 import { NameRoute } from "./routes";
 import { errorHandler } from "./middlewares";
-import { Logs } from "./utils";
+import { Logs } from "./utils/functions";
 import "./services/db.service";
 
 dotenv.config();

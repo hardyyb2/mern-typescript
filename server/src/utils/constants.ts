@@ -1,4 +1,4 @@
-enum Messages {
+export enum Messages {
   CREATED = "Created Name",
   DELETED = "Deleted Name",
   UPDATED = "Updated Name",
@@ -8,5 +8,3 @@ enum Messages {
   PROVIDE_AGE = "Provide age",
   SERVER_ERROR = "Server Error, Please try again",
 }
-
-export default Messages;

@@ -1,7 +1,6 @@
 import { asyncHandler } from "../middlewares";
 import { ErrorResponse, send } from "../common";
-import { Messages } from "../utils";
-
+import { Messages } from "../utils/constants";
 import { NameModel } from "../models";
 
 const {
